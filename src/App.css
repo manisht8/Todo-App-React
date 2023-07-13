@@ -59,11 +59,17 @@ form label{
   align-items: center;
 }
 
+.task.complete {
+  opacity: 0.4;
+  text-decoration: line-through ;
+}
+
 .checkbox {
   width: 1.5em;
   height: 1.5em;
   border: 0;
   accent-color: #515153;
+  margin: 0px 5px;
 }
 
 .button {
