@@ -15,7 +15,7 @@ function TaskInput({onTaskAdd}) {
     }
 
     return (
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form onSubmit={(e) => handleSubmit(e)} id="taskInputForm">
             <input
                 type="text"
                 id="taskInput"

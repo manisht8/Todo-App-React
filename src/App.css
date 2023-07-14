@@ -17,7 +17,7 @@
 
 h2, h3{
   margin: 5px 0px;
- }
+}
 
 .tasks-container{
   width: 65%;
@@ -27,12 +27,8 @@ h2, h3{
   align-items: center;
 }
 
-form {
+#taskInputForm {
   width: 95%;
-}
-
-form label{
-  font-size: 17px;
 }
 
 #taskInput {
@@ -40,11 +36,20 @@ form label{
   border-radius: 7px;
   padding: 5px;
   margin: 6px;
-  font-size: 16px;
   width: 40%;
+  font-size: 16px;
 }
 
-#taskInput:focus {
+.editTaskInput {
+  border: none;
+  border-radius: 7px;
+  padding: 5px;
+  margin: 6px;
+  font-size: 14px;
+}
+
+#taskInput:focus,
+.editTaskInput:focus {
   border: none;
   outline: none;
   box-shadow: 0 0 10px #fff;
@@ -52,20 +57,20 @@ form label{
 
 .task {
   background: none;
-  border: 3px solid #30313D;
-  background-color: #30313D;
+  border: 3px solid #30313d;
+  background-color: #30313d;
   border-radius: 10px;
   margin: 6px;
   padding: 1px 5px;
-  width: 45%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
 
 .task.complete {
   opacity: 0.4;
-  text-decoration: line-through ;
+  text-decoration: line-through;
 }
 
 .checkbox {
@@ -76,20 +81,38 @@ form label{
   margin: 0px 5px;
 }
 
+.taskData {
+  display: flex;
+  align-items: center;
+}
+
 .button {
   background-color: #fff;
   border: 0;
   border-radius: 7px;
   padding: 5px;
   margin: 6px;
-  width: fit-content;
   font-size: 14px;
+  flex-shrink: 0;
 }
 
-.button:hover,  .button:focus {
-  background-color: #30313D;
+.button:hover,
+.button:focus {
+  background-color: #30313d;
   color: white;
   border: 1px solid white;
   cursor: pointer;
   box-shadow: 0 0 7px #fff;
+}
+
+@media (max-width: 600px) {
+  .taskData {
+    flex-basis: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .task {
+    width: 50%;
+  }
 }
