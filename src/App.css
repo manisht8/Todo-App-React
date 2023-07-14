@@ -15,6 +15,10 @@
   align-items: center;
 }
 
+h2, h3{
+  margin: 5px 0px;
+ }
+
 .tasks-container{
   width: 65%;
   margin:auto;

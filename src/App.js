@@ -30,14 +30,47 @@ function App() {
     setTodos(tempTodos);
   }
 
+  function handleDeleteTask(taskIndex) {
+    const tempTodos = todos.filter((task, index) => index !== taskIndex);
+    console.log(taskIndex, tempTodos);
+    setTodos(tempTodos);
+
+    if (tempTodos.length === 0) {
+      localStorage.removeItem('todos');
+    }
+  }
+
+  let completedTasks = todos.filter((task) => task.isCompleted).length;
+  let totalTasks = todos.length;
+
+  function getMessage() {
+    let progress = (completedTasks / totalTasks) * 100;
+    if (progress === 100) {
+      return "Well Done!";
+    }
+    if (progress >= 75) {
+      return "Almost there!";
+    }
+    if (progress === 0) {
+      return "Get few tasks done!";
+    }
+    return "You've got this!";
+  }
+
   return (
     <div className="App">
       <div className="tasks-container">
         <h2>To-Do List</h2>
+        <h3>{completedTasks}/{totalTasks} Tasks Completed!</h3>
+        <h3>{getMessage()}</h3>
         <TaskInput onTaskAdd={(taskName) => handleAddTask(taskName)} />
         {
           todos.map((task, index) => (
-            <Task key={index} {...task} onStatusUpdate={(status) => handleCompleteTask(index, status)} />
+            <Task 
+            {...task} 
+            key={index} 
+            onStatusUpdate={(status) => handleCompleteTask(index, status)}
+            onDelete={() => handleDeleteTask(index)} />
           ))
         }
       </div>

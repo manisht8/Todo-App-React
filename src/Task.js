@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function Task({ name, isCompleted, onStatusUpdate }) {
+function Task({ name, isCompleted, onStatusUpdate, onDelete }) {
   const [checked, setChecked] = useState(isCompleted);
 
   function handleChecked() {
@@ -22,7 +22,9 @@ function Task({ name, isCompleted, onStatusUpdate }) {
       </div>
       <div>
         <button className="button">Edit</button>
-        <button className="button">Delete</button>
+        <button 
+        className="button" 
+        onClick={onDelete}>Delete</button>
       </div>
     </div>
   );
