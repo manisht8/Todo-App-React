@@ -20,29 +20,20 @@ function App() {
     }
   }, []);
 
-  function handleTaskFilter() {
-    if(filter === "Active"){
-      return todos.filter((task) => task.isCompleted === false);
-    } 
-    else if(filter === "Completed") {
-      return todos.filter((task) => task.isCompleted === true);
-    }
-    else {
-      return todos;
-    }
-  }
-
+  // add task
   function handleAddTask(taskName) {
     if (taskName)
       setTodos([...todos, { name: taskName, isCompleted: false }]);
   }
 
+  // on completing task
   function handleCompleteTask(taskIndex, status) {
     const tempTodos = [...todos];
     tempTodos[taskIndex].isCompleted = status;
     setTodos(tempTodos);
   }
 
+  // on deleting task
   function handleDeleteTask(taskIndex) {
     const tempTodos = todos.filter((task, index) => index !== taskIndex);
     setTodos(tempTodos);
@@ -52,15 +43,16 @@ function App() {
     }
   }
 
+  // on editing task
   function handleEditTask(taskIndex, newName) {
     const tempTodos = [...todos];
     tempTodos[taskIndex].name = newName;
     setTodos(tempTodos);
   }
 
+  // custom message
   let completedTasks = todos.filter((task) => task.isCompleted).length;
   let totalTasks = todos.length;
-
   function getMessage() {
     let progress = (completedTasks / totalTasks) * 100;
     if (progress === 100) {
@@ -72,8 +64,38 @@ function App() {
     else if (progress === 0) {
       return "Get few tasks done!";
     }
-    else{
+    else {
       return "You've got this!";
+    }
+  }
+
+  // tasks filter
+  function handleTaskFilter() {
+    if (filter === "Active") {
+      return todos.filter((task) => task.isCompleted === false);
+    }
+    else if (filter === "Completed") {
+      return todos.filter((task) => task.isCompleted === true);
+    }
+    else {
+      return todos;
+    }
+  }
+
+  // deleting multiple tasks
+  function handleMultipleDelete(deleteCriteria) {
+    if (deleteCriteria === "Completed") {
+      const tempTodos = todos.filter((task) => task.isCompleted !== true);
+      setTodos(tempTodos);
+
+      if (tempTodos.length === 0) {
+        localStorage.removeItem('todos');
+      }
+    }
+
+    else if(deleteCriteria === "All") {
+      setTodos([]);
+      localStorage.removeItem('todos');
     }
   }
 
@@ -89,26 +111,35 @@ function App() {
 
         {
           handleTaskFilter().map((task, index) => (
-            <Task 
-            {...task} 
-            key={index} 
-            onStatusUpdate={(status) => handleCompleteTask(index, status)}
-            onEdit={(newName) => handleEditTask(index, newName)}
-            onDelete={() => handleDeleteTask(index)} />
+            <Task
+              {...task}
+              key={index}
+              onStatusUpdate={(status) => handleCompleteTask(index, status)}
+              onEdit={(newName) => handleEditTask(index, newName)}
+              onDelete={() => handleDeleteTask(index)} />
           ))
         }
 
-      <div>
-        <button 
-        className="button"
-        onClick={() => setFilter("All")}>All</button>
-        <button 
-        className="button"
-        onClick={() => setFilter("Active")}>Active</button>
-        <button 
-        className="button"
-        onClick={() => setFilter("Completed")}>Completed</button>
-      </div>
+        <div>
+          <button
+            className="button"
+            onClick={() => setFilter("All")}>All</button>
+          <button
+            className="button"
+            onClick={() => setFilter("Active")}>Active</button>
+          <button
+            className="button"
+            onClick={() => setFilter("Completed")}>Completed</button>
+        </div>
+
+        <div>
+          <button
+            className="button"
+            onClick={() => handleMultipleDelete("Completed")}>Delete Completed Tasks</button>
+          <button
+            className="button"
+            onClick={() => handleMultipleDelete("All")}>Delete All Tasks</button>
+        </div>
 
       </div>
     </div>
