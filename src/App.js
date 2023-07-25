@@ -120,25 +120,28 @@ function App() {
           ))
         }
 
-        <div>
-          <button
-            className="button"
-            onClick={() => setFilter("All")}>All</button>
-          <button
-            className="button"
-            onClick={() => setFilter("Active")}>Active</button>
-          <button
-            className="button"
-            onClick={() => setFilter("Completed")}>Completed</button>
-        </div>
+        <div className="filters">
+          <h3>Filters</h3>
+          <div>
+            <button
+              className="button"
+              onClick={() => setFilter("All")}>All</button>
+            <button
+              className="button"
+              onClick={() => setFilter("Active")}>Active</button>
+            <button
+              className="button"
+              onClick={() => setFilter("Completed")}>Completed</button>
+          </div>
 
-        <div>
-          <button
-            className="button"
-            onClick={() => handleMultipleDelete("Completed")}>Delete Completed Tasks</button>
-          <button
-            className="button"
-            onClick={() => handleMultipleDelete("All")}>Delete All Tasks</button>
+          <div>
+            <button
+              className="button"
+              onClick={() => handleMultipleDelete("Completed")}>Delete Completed Tasks</button>
+            <button
+              className="button"
+              onClick={() => handleMultipleDelete("All")}>Delete All Tasks</button>
+          </div>
         </div>
 
       </div>

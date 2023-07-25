@@ -22,7 +22,7 @@ function TaskInput({onTaskAdd}) {
                 placeholder="Enter Task"
                 value={taskName}
                 onChange={(e) => handleTaskInput(e.target.value)} />
-            <button className="button">Add Task</button>
+            <button className="button" id="submitBtn">Add Task</button>
         </form>
     );
 }
