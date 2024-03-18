@@ -56,7 +56,7 @@ function App() {
   function getMessage() {
     let progress = (completedTasks / totalTasks) * 100;
     if (progress === 100) {
-      return "Well Done!";
+      return "Well Done! You've completed all the tasks!";
     }
     else if (progress >= 75) {
       return "Almost there!";
